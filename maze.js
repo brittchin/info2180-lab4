@@ -1,10 +1,13 @@
 window.onload = function(){
-	var wall = document.getElementById("boundary1");
-	wall.onmouseover=function(){
-		changeColour(wall);
+	var walls = document.querySelectorAll(".boundary");
+	for (var i = 0; i < walls.length; i++) {
+		walls[i].addEventListener("mouseover",function(){changeColour(walls)},false);
+
 	}
 };
 
 function changeColour(elem){
-		elem.setAttribute("class", "boundary youlose");
+	for (var i = elem.length - 1; i >= 0; i--) {
+		elem[i].setAttribute("class","boundary youlose");
 	}
+}

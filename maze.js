@@ -1,4 +1,4 @@
-var win=false;
+var gameLost=false;
 
 window.onload = function(){
 	var walls = document.querySelectorAll(".boundary");
@@ -6,33 +6,33 @@ window.onload = function(){
 	var mazeEnd = document.getElementById("end");
 
 	mazeStart.addEventListener("click",function(){gameStart(walls)});
-	mazeEnd.onmouseover= function(){endGame()};
+	mazeEnd.addEventListener("mouseover",function(){endGame()});
 
 	for (var i = 0; i < walls.length; i++) {
 		walls[i].addEventListener("mouseover",function(){changeColour(walls)});
-
 	}
 };
 
 function gameStart(elem){
-	win=true;
+	gameLost=false;
+	document.getElementById("status").innerHTML="Move your mouse over the 'S' to begin."; 
 	for (var i = 0; i <= elem.length; i++) {
 		elem[i].setAttribute("class","boundary");
 	}
 }
 
 function changeColour(elem){
-	win=false;
+	gameLost=true;
 	for (var i = 0; i <= elem.length; i++) {
 		elem[i].setAttribute("class","boundary youlose");
 	}
 }
 
 function endGame(){
-	if(win){
-		alert('You Win!');
+	if(!gameLost){
+		document.getElementById("status").innerHTML="You Win!";
 	}
 	else{
-		alert('Opps. Game Over!');
+		document.getElementById("status").innerHTML="Opps. Game Over!";
 	}
 }
